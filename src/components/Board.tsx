@@ -1,13 +1,19 @@
 import React from "react";
 import { Square } from "./Square";
 
-export const Board = (props) => {
-  const renderSquare = (i) => {
+type BoardProps = {
+  onClick: (i: number) => void;
+  squares: number[];
+}
+
+export const Board: React.FC<BoardProps> = (props) => {
+  const {onClick, squares} = props;
+  const renderSquare = (i: number) => {
     return (
       <Square
-        value={props.squares[i]}
+        value={squares[i]}
         onClick={() => {
-          props.onClick(i);
+          onClick(i);
         }}
       />
     );

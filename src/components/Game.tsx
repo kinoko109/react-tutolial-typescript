@@ -6,7 +6,7 @@ export const Game = () => {
   const [stepNumber, setStepNumber] = useState(0);
   const [xIsNext, setXIsNext] = useState(true);
 
-  const handleClick = (i) => {
+  const handleClick = (i: number) => {
     const _history = history.slice(0, stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
@@ -19,12 +19,12 @@ export const Game = () => {
     setXIsNext(!xIsNext);
   };
 
-  const jumpTo = (step) => {
+  const jumpTo = (step: number) => {
     setStepNumber(step);
     setXIsNext(step % 2 === 0);
   };
 
-  const calculateWinner = (squares) => {
+  const calculateWinner = (squares: number[]) => {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -50,6 +50,7 @@ export const Game = () => {
   const moves = history.map((step, move) => {
     const desc = move ? "Go to move #" + move : "Go to game start";
     return (
+      // TODO: indexをkeyに設定しているため要修正
       <li key={move}>
         <button onClick={() => jumpTo(move)}>{desc}</button>
       </li>
